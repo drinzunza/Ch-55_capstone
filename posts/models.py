@@ -20,7 +20,7 @@ class Post(models.Model):
         default=None,
         on_delete=models.CASCADE    
     )
-    image = models.ImageField(upload_to="media/posts/", blank=True, null=True)
+    image = models.ImageField(upload_to="posts/", blank=True, null=True)
 
     def __str__(self):
         return self.title
