@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+# load environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages',
     'posts',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -149,3 +156,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     # when running in heroku
 #     import django_heroku
 #     django_heroku.settings(locals())
+
+
+# AWS S3 Storage Config
+AWS_ACCESS_KEY_ID=env("AWS_KEY")
+AWS_SECRET_ACCESS_KEY=env("AWS_SECRET")
+AWS_STORAGE_BUCKET_NAME=env("BUCKET")
+AWS_S3_REGION_NAME="us-west-1"
+AWS_QUERYSTRING_AUTH=False
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = "public-read"
+
+STORAGES = { 
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },    
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
