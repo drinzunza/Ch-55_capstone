@@ -48,6 +48,8 @@ class PostListView(ListView):
         all_posts = self.get_filtered_data(search_text)
         context["post_list"] = all_posts
         return context
+    
+    
 
 class PostDetailView(DetailView):
     template_name = "posts/detail.html"
