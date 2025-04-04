@@ -81,10 +81,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+db_name = 'db.sqlite3'
+if "DYNO" in os.environ:
+    db_name = 'dbProd.sqlite3'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / db_name,
     }
 }
 
@@ -140,7 +144,7 @@ LOGOUT_REDIRECT_URL = "login"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-if "DYNO" in os.environ:
-    # when running in heroku
-    import django_heroku
-    django_heroku.settings(locals())
+# if "DYNO" in os.environ:
+#     # when running in heroku
+#     import django_heroku
+#     django_heroku.settings(locals())
