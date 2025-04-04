@@ -138,3 +138,9 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+if "DYNO" in os.environ:
+    # when running in heroku
+    import django_heroku
+    django_heroku.settigs(locals())
