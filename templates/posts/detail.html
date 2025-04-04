@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+{% endblock %}
+
+{% block title %}
+    Post: {{post.title}}
+{% endblock %}
+
+{% block content %}
+    <h1>Post #{{post.id}}</h1>
+    <h2>{{post.title}}</h2>
+    <h5>{{post.subtitle}}</h5>
+    <h6>Author: {{post.author}}</h6>
+    <strong>Created on: {{post.created_on}}</strong>
+    <p>{{post.body}}</p>
+
+    {% if user.username == post.author.username %}
+    <a class="btn btn-outline-dark" href="{% url 'post_update' post.id %}">Update post</a>
+    {% endif %}
+
+    <hr>
+    <div class="comments-container">
+        <h4>Post comments</h4>
+
+        {% for cm in comments %}
+            <div class="comment">
+                <label class="author">{{cm.author}}</label>
+                <p>{{cm.content}}</p>
+                <label class="date">{{cm.created_on}}</label>
+            </div>
+        {% endfor %}
+
+        <div class="comment">
+            <label class="author">Create new comment</label>
+            <form method="post" action="{% url 'comment_create' %}">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{post.id}}">
+                <textarea name="comment" rows="3"></textarea>
+                <button class="btn btn-sm btn-primary">Send >></button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

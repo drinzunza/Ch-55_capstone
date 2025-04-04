@@ -1,0 +1,17 @@
+.about{
+    padding-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.about h4{
+    color: #6a6b6c;
+    margin-bottom: 0;
+    margin-top: 12px;
+}
+
+.about h1{
+    color: darkcyan;
+}
