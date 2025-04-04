@@ -82,10 +82,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 db_name = 'db.sqlite3'
-media_folder = 'media'
 if "DYNO" in os.environ:
     db_name = 'dbProd.sqlite3'
-    media_folder = 'mediaProd'
 
 DATABASES = {
     'default': {
@@ -131,9 +129,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
-MEDIA_URL =  f"/{media_folder}/"
+MEDIA_URL =  f"media/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, media_folder)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type

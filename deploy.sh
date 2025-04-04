@@ -18,7 +18,6 @@
 # Configuration
 HEROKU_APP_NAME="capstone-ch52"  # Replace with your app name
 DB_FILE="dbProd.sqlite3"
-MEDIA_DIR="mediaProd"
 
 # Step 1: Clean up old files
 echo "🗑️ Cleaning up old local files..."
@@ -35,14 +34,6 @@ else
   exit 1
 fi
 
-# Step 3: Download media files - NEW RELIABLE METHOD
-echo "⬇️ Downloading media files from Heroku..."
-heroku run --no-tty --app "$HEROKU_APP_NAME" "cd /app && tar -czf /tmp/media.tar.gz $MEDIA_DIR" && \
-heroku ps:copy /tmp/media.tar.gz --app "$HEROKU_APP_NAME" && \
-tar -xzf media.tar.gz && \
-rm media.tar.gz && \
-echo "✅ Media files downloaded and extracted." || \
-{ echo "❌ ERROR: Could not download media files"; exit 1; }
 
 # Step 4: Push to Heroku (if needed)
 echo "🚀 Pushing code to Heroku..."
