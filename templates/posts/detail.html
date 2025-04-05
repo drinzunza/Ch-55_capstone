@@ -15,6 +15,13 @@
     <h5>{{post.subtitle}}</h5>
     <h6>Author: {{post.author}}</h6>
     <strong>Created on: {{post.created_on}}</strong>
+    
+    {% if post.image %}
+    <div class="post-image">
+        <img src="{{post.image.url}}" alt="{{post.title}}" class="img-fluid">
+    </div>
+    {% endif %}
+    
     <p>{{post.body}}</p>
 
     {% if user.username == post.author.username %}
