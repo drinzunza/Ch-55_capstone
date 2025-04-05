@@ -94,6 +94,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     db_name = 'dbProd.sqlite3'
 
 if DEBUG:
+    print("Using sqlite db")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -101,6 +102,7 @@ if DEBUG:
         }
     }
 else:
+    print("Using postgresql db")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -112,7 +114,6 @@ else:
         }
     }
 
-print("DEBUG IS " + DEBUG)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
