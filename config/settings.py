@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # if "DYNO" in os.environ:
 #     db_name = 'dbProd.sqlite3'
 
-if DEBUG:
+if False and DEBUG:
     print("Using sqlite db")
     DATABASES = {
         'default': {
