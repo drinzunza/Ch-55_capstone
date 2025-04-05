@@ -38,6 +38,8 @@ ALLOWED_HOSTS = [
     ".railway.app",
 ]
 
+CSRF_TRUSTED_ORIGINS = ["https://ch-55capstone-production.up.railway.app"]
+
 
 # Application definition
 
@@ -89,8 +91,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 db_name = 'db.sqlite3'
-if "DYNO" in os.environ:
-    db_name = 'dbProd.sqlite3'
+# if "DYNO" in os.environ:
+#     db_name = 'dbProd.sqlite3'
 
 DATABASES = {
     'default': {
